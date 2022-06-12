@@ -1,3 +1,4 @@
+
 module.exports = {
   entry: {
     bundle:"./src/index.js",
@@ -11,4 +12,10 @@ module.exports = {
     open:true
   },
   mode: "development",
+  module:{
+    rules:[{
+      test:/\.css$/,
+      use:['style-loader','css-loader']
+    }]
+  }
 };
