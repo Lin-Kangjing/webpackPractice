@@ -3,10 +3,11 @@
  * @FilePath: \webpackPractice\webpack.config.js
  * @Date: 2022-06-11 16:24:41
  * @LastEditors: Lin_kangjing
- * @LastEditTime: 2022-06-13 21:02:23
+ * @LastEditTime: 2022-06-14 20:31:35
  * @author: Lin_kangjing
  */
-const path = require('path');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const path = require("path");
 module.exports = {
   entry: {
     bundle: "./src/index.js",
@@ -19,7 +20,13 @@ module.exports = {
     static: "./",
     open: true,
   },
-  mode: "development",
+  // devtool: "source-map",
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: "[name].css",
+      chunkFilename: "[id].css",
+    }),
+  ],
   module: {
     rules: [
       {
@@ -29,6 +36,7 @@ module.exports = {
           {
             loader: "babel-loader",
             options: {
+              sourceMap: true,
               cacheDirectory: true,
               presets: [
                 [
@@ -42,15 +50,25 @@ module.exports = {
           },
           {
             loader: path.resolve("force-strict-loader/index.js"),
-            options:{
+            options: {
               sourceMap: true,
-            }
+            },
           },
         ],
       },
       {
         test: /\.css$/,
-        use: ["style-loader", "css-loader"],
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              publicPath: "./css",
+            },
+          },
+          "css-loader",
+          // "sass-loader"
+          "postcss-loader",
+        ],
       },
     ],
   },

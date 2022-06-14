@@ -1,3 +1,9 @@
 body{
   background-color:red
 }
+.flex{
+  display:flex;
+}
+.grid{
+  display:grid;
+}
