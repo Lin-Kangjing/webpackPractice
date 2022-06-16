@@ -1,9 +1,9 @@
-body{
-  background-color:red
+body {
+  background-color: #eee;
 }
-.flex{
-  display:flex;
+.flex {
+  display: flex;
 }
-.grid{
-  display:grid;
+.grid {
+  display: grid;
 }
